@@ -1,8 +1,50 @@
 package com.wq.linkedlist;
 
-/**
- * 双向链表
- */
-public class DoubleLinkedList {
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+/** 双向链表 */
+@Data
+@NoArgsConstructor
+public class DoubleLinkedList<T> {
+  T data;
+  DoubleLinkedList<T> pre;
+  DoubleLinkedList<T> next;
+
+  DoubleLinkedList(T data) {
+    this.data = data;
+  }
+
+  /** 末尾插入 */
+  public void addLast(DoubleLinkedList<T> newNode) {}
+
+  /**
+   * 指定位置插入
+   *
+   * @param data
+   * @param index
+   */
+  public void add(T data, DoubleLinkedList<T> index) {}
+
+  /** 删除指定数据的节点 */
+  public void del(T data) {}
+
+  /** 删除指定位置的节点 */
+  public void del(int k) {}
+
+  /** 删除头 */
+  public void delFirst() {}
+  /** 删除尾 */
+  public void delLast() {}
+
+  /** 删除尾并返回 */
+  public DoubleLinkedList<T> pop() {
+    return null;
+  }
+
+  /** 找到第k个位置节点，k从0开始 */
+  public DoubleLinkedList<T> find(int k) {
+
+    return null;
+  }
 }
