@@ -5,17 +5,23 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class DoubleLinkedListTest {
-  private DoubleLinkedList<Integer> doubleLinkedList = new DoubleLinkedList<>();
+    private DoubleLinkedList<Integer> doubleLinkedList = new DoubleLinkedList<>();
 
-  @BeforeEach
-  public void init() {
-    doubleLinkedList.setData(1);
-    doubleLinkedList.setNext(null);
-    doubleLinkedList.setPre(null);
-  }
+    @BeforeEach
+    public void init() {
+//        doubleLinkedList.setData(1);
+//        doubleLinkedList.setNext(null);
+//        doubleLinkedList.setPre(null);
+    }
 
-  @Test
-  public void testAddLast() {
-    Assertions.assertEquals(1, doubleLinkedList.getData());
-  }
+    @Test
+    public void testAddLast() {
+//        Assertions.assertEquals(1, doubleLinkedList.getData());
+        doubleLinkedList.addLast(2);
+        doubleLinkedList.addLast(3);
+        while (doubleLinkedList.next != null) {
+            System.out.println("v:" + doubleLinkedList.getData());
+            doubleLinkedList = doubleLinkedList.getNext();
+        }
+    }
 }
