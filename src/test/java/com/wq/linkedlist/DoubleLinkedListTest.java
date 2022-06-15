@@ -9,19 +9,16 @@ public class DoubleLinkedListTest {
 
     @BeforeEach
     public void init() {
-//        doubleLinkedList.setData(1);
-//        doubleLinkedList.setNext(null);
-//        doubleLinkedList.setPre(null);
+        doubleLinkedList.setData(1);
+        doubleLinkedList.setNext(null);
+        doubleLinkedList.setPre(null);
     }
 
     @Test
     public void testAddLast() {
-//        Assertions.assertEquals(1, doubleLinkedList.getData());
+        Assertions.assertEquals(1, doubleLinkedList.getData());
         doubleLinkedList.addLast(2);
         doubleLinkedList.addLast(3);
-        while (doubleLinkedList.next != null) {
-            System.out.println("v:" + doubleLinkedList.getData());
-            doubleLinkedList = doubleLinkedList.getNext();
-        }
+
     }
 }

@@ -40,8 +40,21 @@ public class DoubleLinkedList<T> {
      */
     public void add(T data, DoubleLinkedList<T> index) {}
 
-    /** 删除指定数据的节点 */
-    public void del(T data) {}
+    /** 删除最先指定数据的节点 */
+    public void del(T data) {
+        DoubleLinkedList<T> next = this.next;
+        if (this.data.equals(data)) {
+            next.setPre(null);
+            next.del(data);
+        } else {
+            if (next == null || next.getNext() == null) {
+                return;
+            }
+            while (next != null && next.getNext() != null) {
+                next = next.getNext();
+            }
+        }
+    }
 
     /** 删除指定位置的节点 */
     public void del(int k) {}
