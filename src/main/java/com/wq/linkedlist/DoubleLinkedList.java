@@ -61,7 +61,7 @@ public class DoubleLinkedList<T> {
             for (int i = 0; i < index - 1; i++) {
                 head = head.getNext();
             }
-            newNode.setNext(head.getNext().getPre());
+            newNode.setNext(head.getNext());
             head.getNext().setPre(newNode);
             head.setNext(newNode);
             newNode.setPre(head);
