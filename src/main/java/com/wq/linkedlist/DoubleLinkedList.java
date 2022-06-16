@@ -7,29 +7,38 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class DoubleLinkedList<T> {
-    T data;
-    DoubleLinkedList<T> pre;
-    DoubleLinkedList<T> next;
+    private Node<T> head;
+    private Node<T> tail;
+    int length;
 
-    DoubleLinkedList(T data) {
-        this.data = data;
+    public boolean isEmpty() {
+        return length == 0;
+    }
+
+    /** 头插入 */
+    public void addFirst(T newData) {
+        Node<T> newNode = new Node<>(newData);
+        if (isEmpty()) {
+            tail = newNode;
+        } else {
+            head.setPre(newNode);
+            newNode.setNext(head);
+        }
+        head = newNode;
+        length++;
     }
 
     /** 末尾插入 */
     public void addLast(T newData) {
-        DoubleLinkedList<T> newNode = new DoubleLinkedList<>(newData);
-        if (pre == null && data == null && next == null) {
-            data = newNode.getData();
+        Node<T> newNode = new Node<>(newData);
+        if (isEmpty()) {
+            head = newNode;
         } else {
-            DoubleLinkedList<T> tmp = this;
-            while (tmp != null && tmp.getNext() != null) {
-                tmp = tmp.next;
-            }
-            newNode.setPre(tmp);
-            if (tmp != null) {
-                tmp.next = newNode;
-            }
+            tail.setNext(newNode);
+            newNode.setPre(tail);
         }
+        tail = newNode;
+        length++;
     }
 
     /**
@@ -38,22 +47,33 @@ public class DoubleLinkedList<T> {
      * @param data
      * @param index
      */
-    public void add(T data, DoubleLinkedList<T> index) {}
+    public boolean add(int index, T newData) {
+        if (index > length - 1) {
+            return false;
+        }
+        Node<T> newNode = new Node<>(newData);
+        if (length == 0) {
+            addFirst(newData);
+        } else if (index == length - 1) {
+            addLast(newData);
+        } else {
+            Node<T> originHead = head;
+            for (int i = 0; i < index - 1; i++) {
+                head = head.getNext();
+            }
+            newNode.setNext(head.getNext().getPre());
+            head.getNext().setPre(newNode);
+            head.setNext(newNode);
+            newNode.setPre(head);
+            head = originHead;
+            length++;
+        }
+        return true;
+    }
 
     /** 删除最先指定数据的节点 */
     public void del(T data) {
-        DoubleLinkedList<T> next = this.next;
-        if (this.data.equals(data)) {
-            next.setPre(null);
-            next.del(data);
-        } else {
-            if (next == null || next.getNext() == null) {
-                return;
-            }
-            while (next != null && next.getNext() != null) {
-                next = next.getNext();
-            }
-        }
+
     }
 
     /** 删除指定位置的节点 */
@@ -71,8 +91,22 @@ public class DoubleLinkedList<T> {
     }
 
     /** 找到第k个位置节点，k从0开始 */
-    public DoubleLinkedList<T> find(int k) {
+    public Node<T> find(int index) {
+        if (index > length - 1) {
+            return null;
+        }
+        for (int i = 0; i < index - 1; i++) {
+            head = head.getNext();
+        }
+        return head;
+    }
 
-        return null;
+    public void displayAll() {
+        Node<T> originHead = head;
+        for (int i = 0; i < length; i++) {
+            System.out.println(head.getData());
+            head = head.getNext();
+        }
+        head = originHead;
     }
 }
