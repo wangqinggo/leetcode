@@ -6,6 +6,7 @@ group 'com.wq'
 version '1.0-SNAPSHOT'
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -21,4 +22,8 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    testLogging.showStandardStreams(true)
+    testLogging.showStackTraces(true)
 }
+
+java.sourceCompatibility(JavaVersion.VERSION_17)

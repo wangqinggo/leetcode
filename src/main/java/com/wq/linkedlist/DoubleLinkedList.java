@@ -44,7 +44,7 @@ public class DoubleLinkedList<T> {
     /**
      * 指定位置插入
      *
-     * @param data
+     * @param newData
      * @param index
      */
     public boolean add(int index, T newData) {
