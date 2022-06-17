@@ -69,6 +69,24 @@ public class DoubleLinkedList<T> {
         return true;
     }
 
+    /** 指定位置插入 */
+    public void update(T oldData, T newData) {
+        if (oldData.equals(newData)) {
+            return;
+        }
+        Node<T> originHead = head;
+        if (head != null) {
+            for (int i = 0; i < length; i++) {
+                if (oldData.equals(head.getData())) {
+                    head.setData(newData);
+                    head = originHead;
+                    return;
+                }
+                head = head.getNext();
+            }
+        }
+    }
+
     /** 删除最先指定数据的节点 */
     public void del(T data) {
         Node<T> originHead = head;

@@ -42,5 +42,8 @@ public class DoubleLinkedListTest {
         System.out.println("==========pop==========");
         Assertions.assertEquals(4, doubleLinkedList.pop());
         doubleLinkedList.displayAll();
+        System.out.println("==========update==========");
+        doubleLinkedList.update(3,333);
+        doubleLinkedList.displayAll();
     }
 }
