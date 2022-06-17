@@ -44,20 +44,18 @@ public class DoubleLinkedList<T> {
     /**
      * 指定位置插入
      *
-     * @param newData
-     * @param index
      */
     public boolean add(int index, T newData) {
         if (index > length - 1) {
             return false;
         }
-        Node<T> newNode = new Node<>(newData);
         if (length == 0) {
             addFirst(newData);
         } else if (index == length - 1) {
             addLast(newData);
         } else {
             Node<T> originHead = head;
+            Node<T> newNode = new Node<>(newData);
             for (int i = 0; i < index - 1; i++) {
                 head = head.getNext();
             }
@@ -73,32 +71,62 @@ public class DoubleLinkedList<T> {
 
     /** 删除最先指定数据的节点 */
     public void del(T data) {
-
+        Node<T> originHead = head;
+        for (int i = 0; i < length; i++) {
+            if (head != null) {
+                if (data.equals(head.getData())) {
+                    Node<T> pre = head.getPre();
+                    Node<T> next = head.getNext();
+                    pre.setNext(next);
+                    next.setPre(pre);
+                    head = originHead;
+                    length--;
+                    return;
+                }
+                head = head.getNext();
+            }
+        }
     }
 
-    /** 删除指定位置的节点 */
-    public void del(int k) {}
-
     /** 删除头 */
-    public void delFirst() {}
+    public void delFirst() {
+        if (!isEmpty()) {
+            Node<T> next = head.getNext();
+            next.setPre(null);
+            head = next;
+            length--;
+        }
+    }
 
     /** 删除尾 */
-    public void delLast() {}
+    public void delLast() {
+        if (!isEmpty()) {
+            Node<T> tailPre = tail.getPre();
+            tailPre.setNext(null);
+            tail = tailPre;
+            length--;
+        }
+    }
 
     /** 删除尾并返回 */
-    public DoubleLinkedList<T> pop() {
-        return null;
+    public T pop() {
+        Node<T> originTail = tail;
+        delLast();
+        return originTail.getData();
     }
 
     /** 找到第k个位置节点，k从0开始 */
     public Node<T> find(int index) {
+        Node<T> originHead = head;
         if (index > length - 1) {
             return null;
         }
         for (int i = 0; i < index - 1; i++) {
             head = head.getNext();
         }
-        return head;
+        Node<T> data = head;
+        head = originHead; // 重置回原始头
+        return data;
     }
 
     public void displayAll() {

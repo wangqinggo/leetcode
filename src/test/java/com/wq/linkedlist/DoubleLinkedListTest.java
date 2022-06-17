@@ -28,5 +28,19 @@ public class DoubleLinkedListTest {
         doubleLinkedList.add(3, 33);
         doubleLinkedList.displayAll();
         Assertions.assertEquals(33, doubleLinkedList.find(4).getData());
+        doubleLinkedList.del(33);
+        System.out.println("==========del 33==========");
+        doubleLinkedList.displayAll();
+        Assertions.assertEquals(3, doubleLinkedList.find(4).getData());
+        System.out.println("==========delFirst==========");
+        doubleLinkedList.delFirst();
+        Assertions.assertEquals(1, doubleLinkedList.find(0).getData());
+        doubleLinkedList.displayAll();
+        System.out.println("==========delLast==========");
+        doubleLinkedList.delLast();
+        doubleLinkedList.displayAll();
+        System.out.println("==========pop==========");
+        Assertions.assertEquals(4, doubleLinkedList.pop());
+        doubleLinkedList.displayAll();
     }
 }
