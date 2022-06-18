@@ -2,8 +2,10 @@ package com.wq.linkedlist;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("DoubleLinkedListTest")
 public class DoubleLinkedListTest {
     private final DoubleLinkedList<Integer> doubleLinkedList = new DoubleLinkedList<>();
 
@@ -12,6 +14,15 @@ public class DoubleLinkedListTest {
         doubleLinkedList.addLast(1);
         doubleLinkedList.addLast(2);
         doubleLinkedList.addLast(3);
+        doubleLinkedList.displayAll();
+        System.out.println("===init end====");
+    }
+
+    @Test
+    public void testAddFirst() {
+        doubleLinkedList.addFirst(0);
+        Assertions.assertEquals(0, doubleLinkedList.getHead().getData());
+        doubleLinkedList.displayAll();
     }
 
     @Test
@@ -21,29 +32,46 @@ public class DoubleLinkedListTest {
         doubleLinkedList.addLast(5);
         Assertions.assertEquals(1, doubleLinkedList.getHead().getData());
         Assertions.assertEquals(5, doubleLinkedList.getTail().getData());
-        doubleLinkedList.addFirst(0);
+    }
+
+    @Test
+    public void testAdd() {
+        doubleLinkedList.add(1, 33);
         doubleLinkedList.displayAll();
-        System.out.println("==========1==========");
-        Assertions.assertEquals(0, doubleLinkedList.getHead().getData());
-        doubleLinkedList.add(3, 33);
+        Assertions.assertEquals(33, doubleLinkedList.find(1).getData());
+    }
+
+    @Test
+    public void testDel() {
+        doubleLinkedList.del(3);
         doubleLinkedList.displayAll();
-        Assertions.assertEquals(33, doubleLinkedList.find(4).getData());
-        doubleLinkedList.del(33);
-        System.out.println("==========del 33==========");
-        doubleLinkedList.displayAll();
-        Assertions.assertEquals(3, doubleLinkedList.find(4).getData());
-        System.out.println("==========delFirst==========");
+        Assertions.assertEquals(2, doubleLinkedList.find(1).getData());
+    }
+
+    @Test
+    public void testDelFirst() {
         doubleLinkedList.delFirst();
-        Assertions.assertEquals(1, doubleLinkedList.find(0).getData());
+        Assertions.assertEquals(2, doubleLinkedList.find(0).getData());
         doubleLinkedList.displayAll();
-        System.out.println("==========delLast==========");
+    }
+
+    @Test
+    public void testDelLast() {
         doubleLinkedList.delLast();
+        Assertions.assertEquals(2, doubleLinkedList.find(1).getData());
         doubleLinkedList.displayAll();
-        System.out.println("==========pop==========");
-        Assertions.assertEquals(4, doubleLinkedList.pop());
+    }
+
+    @Test
+    public void testPop() {
+        Assertions.assertEquals(3, doubleLinkedList.pop());
         doubleLinkedList.displayAll();
-        System.out.println("==========update==========");
-        doubleLinkedList.update(3,333);
+    }
+
+    @Test
+    public void testUpdate() {
+        doubleLinkedList.update(3, 333);
+        Assertions.assertEquals(333, doubleLinkedList.find(2).getData());
         doubleLinkedList.displayAll();
     }
 }

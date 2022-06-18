@@ -41,10 +41,7 @@ public class DoubleLinkedList<T> {
         length++;
     }
 
-    /**
-     * 指定位置插入
-     *
-     */
+    /** 指定位置插入 */
     public boolean add(int index, T newData) {
         if (index > length - 1) {
             return false;
@@ -96,7 +93,9 @@ public class DoubleLinkedList<T> {
                     Node<T> pre = head.getPre();
                     Node<T> next = head.getNext();
                     pre.setNext(next);
-                    next.setPre(pre);
+                    if (next != null) {
+                        next.setPre(pre);
+                    }
                     head = originHead;
                     length--;
                     return;
@@ -139,7 +138,7 @@ public class DoubleLinkedList<T> {
         if (index > length - 1) {
             return null;
         }
-        for (int i = 0; i < index - 1; i++) {
+        for (int i = 0; i < index; i++) {
             head = head.getNext();
         }
         Node<T> data = head;
