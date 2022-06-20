@@ -4,24 +4,24 @@ import lombok.Data;
 
 @Data
 public class StackBasedOnLinkedList<T> {
-    private Node<T> top;
+    private StackNode<T> top;
 
     /** 入栈 */
     public void push(T data) {
         if (data != null) {
-            Node<T> tNode = new Node<>(data);
-            tNode.setNext(top);
-            top = tNode;
+            StackNode<T> tStackNode = new StackNode<>(data);
+            tStackNode.setNext(top);
+            top = tStackNode;
         }
     }
 
     /** 出栈 */
-    public Node<T> pop() {
+    public StackNode<T> pop() {
         if (top != null) {
-            Node<T> next = top.getNext();
-            Node<T> tNode = top;
+            StackNode<T> next = top.getNext();
+            StackNode<T> tStackNode = top;
             top = next;
-            return tNode;
+            return tStackNode;
         }
         return null;
     }
