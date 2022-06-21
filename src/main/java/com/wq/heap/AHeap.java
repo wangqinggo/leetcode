@@ -38,9 +38,12 @@ public abstract class AHeap implements Heap {
 
     @Override
     public void displayHeap() {
+        System.out.print("heapArray: ");
         for (HeapNode heapNode : this.heapArray) {
-            System.out.print("heapArray: ");
-            System.out.println(heapNode.getData() + " ");
+            if (heapNode != null) {
+                System.out.print(heapNode.getData() + " ");
+            }
         }
+        System.out.println();
     }
 }
