@@ -1,6 +1,7 @@
-package com.wq.trees;
+package com.wq.trees.bst;
 
 
+import com.wq.trees.bst.BST;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

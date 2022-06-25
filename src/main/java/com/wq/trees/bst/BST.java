@@ -1,4 +1,4 @@
-package com.wq.trees;
+package com.wq.trees.bst;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,9 +12,9 @@ import java.util.NoSuchElementException;
 @Data
 @NoArgsConstructor
 public class BST<K extends Comparable<K>, V> {
-    private TreeNode<K, V> root;
+    private Node<K, V> root;
 
-    private int size(TreeNode<K, V> tn) {
+    private int size(Node<K, V> tn) {
         if (tn == null) {
             return 0;
         } else {
@@ -31,7 +31,7 @@ public class BST<K extends Comparable<K>, V> {
     }
 
 
-    private TreeNode<K, V> put(TreeNode<K, V> tn, K k, V v) {
+    private Node<K, V> put(Node<K, V> tn, K k, V v) {
         if (k == null) throw new IllegalArgumentException("key is null.");
 
         if (v == null) {
@@ -40,15 +40,15 @@ public class BST<K extends Comparable<K>, V> {
         }
 
         if (tn == null) {
-            return new TreeNode<>(k, v, 1);
+            return new Node<>(k, v, 1);
         }
 
         int cmp = k.compareTo(tn.getK());
         if (cmp < 0) {
-            TreeNode<K, V> left = tn.getLeft();
+            Node<K, V> left = tn.getLeft();
             tn.setLeft(put(left, k, v));
         } else if (cmp > 0) {
-            TreeNode<K, V> right = tn.getRight();
+            Node<K, V> right = tn.getRight();
             tn.setRight(put(right, k, v));
         } else {
             tn.setV(v);
@@ -61,7 +61,7 @@ public class BST<K extends Comparable<K>, V> {
         return get(root, k);
     }
 
-    private V get(TreeNode<K, V> tn, K k) {
+    private V get(Node<K, V> tn, K k) {
         if (k == null) throw new IllegalArgumentException("key is null.");
         if (tn == null) return null;
         int cmp = k.compareTo(tn.getK());
@@ -101,7 +101,7 @@ public class BST<K extends Comparable<K>, V> {
     /**
      * delete max ,set left
      */
-    private TreeNode<K, V> deleteMin(TreeNode<K, V> x) {
+    private Node<K, V> deleteMin(Node<K, V> x) {
         if (x.getLeft() == null) return x.getRight();// delete self
         x.setLeft(deleteMin(x.getLeft()));
         x.setSize(size(x.getLeft()) + size(x.getRight()) + 1);
@@ -116,14 +116,14 @@ public class BST<K extends Comparable<K>, V> {
     /**
      * delete max ,set right
      */
-    private TreeNode<K, V> deleteMax(TreeNode<K, V> x) {
+    private Node<K, V> deleteMax(Node<K, V> x) {
         if (x.getRight() == null) return x.getLeft();// delete self
         x.setRight(deleteMax(x.getRight()));
         x.setSize(size(x.getLeft()) + size(x.getRight()) + 1);
         return x;
     }
 
-    private TreeNode<K, V> delete(TreeNode<K, V> tn, K k) {
+    private Node<K, V> delete(Node<K, V> tn, K k) {
         if (tn == null) {
             return null;
         } else {
@@ -135,7 +135,7 @@ public class BST<K extends Comparable<K>, V> {
             } else {
                 if (tn.getRight() == null) return tn.getLeft();
                 if (tn.getLeft() == null) return tn.getRight();
-                TreeNode<K, V> t = tn;
+                Node<K, V> t = tn;
                 tn = min(t.getRight());
                 tn.setRight(deleteMin(t.getRight()));
                 tn.setLeft(t.getLeft());
@@ -160,7 +160,7 @@ public class BST<K extends Comparable<K>, V> {
         root = delete(root, k);
     }
 
-    private TreeNode<K, V> min(TreeNode<K, V> tn) {
+    private Node<K, V> min(Node<K, V> tn) {
         if (tn.getLeft() == null) return tn;
         else return min(tn.getLeft());
     }
@@ -172,7 +172,7 @@ public class BST<K extends Comparable<K>, V> {
         preOrderTraverseRecursion(root);
     }
 
-    private void preOrderTraverseRecursion(TreeNode<K, V> tn) {
+    private void preOrderTraverseRecursion(Node<K, V> tn) {
         if (tn != null) {
             System.out.print("k:" + tn.getK() + ",v:" + tn.getV() + "  ");
             preOrderTraverseRecursion(tn.getLeft());
@@ -184,16 +184,16 @@ public class BST<K extends Comparable<K>, V> {
         preOrderTraverseUnRecursion(root);
     }
 
-    private void preOrderTraverseUnRecursion(TreeNode<K, V> tn) {
-        LinkedList<TreeNode<K, V>> stack = new LinkedList<>();
-        TreeNode<K, V> n = tn;
+    private void preOrderTraverseUnRecursion(Node<K, V> tn) {
+        LinkedList<Node<K, V>> stack = new LinkedList<>();
+        Node<K, V> n = tn;
         while (n != null || !stack.isEmpty()) {
             if (n != null) {
                 System.out.print("k:" + n.getK() + ",v:" + n.getV() + "  ");
                 stack.push(n);
                 n = n.getLeft();
             } else {
-                TreeNode<K, V> t = stack.pop();
+                Node<K, V> t = stack.pop();
                 n = t.getRight();
             }
         }
@@ -206,7 +206,7 @@ public class BST<K extends Comparable<K>, V> {
         midOrderTraverseRecursion(root);
     }
 
-    private void midOrderTraverseRecursion(TreeNode<K, V> tn) {
+    private void midOrderTraverseRecursion(Node<K, V> tn) {
         if (tn != null) {
             midOrderTraverseRecursion(tn.getLeft());
             System.out.print("k:" + tn.getK() + ",v:" + tn.getV() + "  ");
@@ -221,7 +221,7 @@ public class BST<K extends Comparable<K>, V> {
         postOrderTraverseRecursion(root);
     }
 
-    private void postOrderTraverseRecursion(TreeNode<K, V> tn) {
+    private void postOrderTraverseRecursion(Node<K, V> tn) {
         if (tn != null) {
             postOrderTraverseRecursion(tn.getRight());
             postOrderTraverseRecursion(tn.getLeft());
@@ -236,12 +236,12 @@ public class BST<K extends Comparable<K>, V> {
         levelOrderTraverseRecursion(root);
     }
 
-    private void levelOrderTraverseRecursion(TreeNode<K, V> tn) {
+    private void levelOrderTraverseRecursion(Node<K, V> tn) {
         if (tn != null) {
-            LinkedList<TreeNode<K, V>> queue = new LinkedList<>();
+            LinkedList<Node<K, V>> queue = new LinkedList<>();
             queue.offer(tn);
             while (!queue.isEmpty()) {
-                TreeNode<K, V> n = queue.poll();
+                Node<K, V> n = queue.poll();
                 System.out.print("k:" + n.getK() + ",v:" + n.getV() + "  ");
                 if (n.getLeft() != null) {
                     queue.offer(n.getLeft());

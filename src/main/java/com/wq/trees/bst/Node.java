@@ -1,15 +1,15 @@
-package com.wq.trees;
+package com.wq.trees.bst;
 
 import lombok.Data;
 
 @Data
-public class TreeNode<K, V> {
+public class Node<K, V> {
     private K k;           // sorted by key
     private V v;         // associated data
-    private TreeNode<K,V> left, right;  // left and right subtrees
+    private Node<K,V> left, right;  // left and right subtrees
     private int size;
 
-    public TreeNode(K k, V v, int size) {
+    public Node(K k, V v, int size) {
         this.k = k;
         this.v = v;
         this.size = size;

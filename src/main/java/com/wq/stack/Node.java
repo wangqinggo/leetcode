@@ -3,11 +3,11 @@ package com.wq.stack;
 import lombok.Data;
 
 @Data
-public class StackNode<T> {
+public class Node<T> {
     private T data;
-    private StackNode<T> next;
+    private Node<T> next;
 
-    StackNode(T data) {
+    Node(T data) {
         this.data = data;
     }
 }
