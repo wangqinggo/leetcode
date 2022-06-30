@@ -1,11 +1,12 @@
 package com.wq.trees.bst;
 
 
-import com.wq.trees.bst.BST;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("BSTTest")
 public class BSTTest {
     private final BST<Integer, Integer> bst = new BST<>();
 

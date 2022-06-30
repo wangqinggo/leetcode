@@ -3,8 +3,10 @@ package com.wq.hashmap;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("CustomHashMapImplTest")
 public class CustomHashMapImplTest {
     public final CustomHashMapImpl<String,String> customHashMap =new CustomHashMapImpl<>();
 
